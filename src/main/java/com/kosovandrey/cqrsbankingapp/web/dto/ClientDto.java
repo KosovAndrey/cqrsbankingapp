@@ -16,12 +16,20 @@ public class ClientDto {
     private UUID id;
 
     @NotNull(message = "Name must be not null.")
-    @Length(min = 1, max = 255, message = "Name length must be in {min} and {max}.")
+    @Length(
+            min = 1,
+            max = 255,
+            message = "Name length must be in {min} and {max}."
+    )
     private String name;
 
     @Email(message = "Username must be a valid email.")
     @NotNull(message = "Username must be not null.")
-    @Length(min = 1, max = 255, message = "Username length must be in {min} and {max}.")
+    @Length(
+            min = 1,
+            max = 255,
+            message = "Username length must be in {min} and {max}."
+    )
     private String username;
 
     @NotNull(message = "Password must be not null.")

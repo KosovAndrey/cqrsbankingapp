@@ -5,5 +5,6 @@ import com.kosovandrey.cqrsbankingapp.web.dto.TransactionDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface TransactionMapper extends Mappable<Transaction, TransactionDto> {
+public interface TransactionMapper
+        extends Mappable<Transaction, TransactionDto> {
 }

@@ -4,5 +4,11 @@ import com.kosovandrey.cqrsbankingapp.domain.model.Client;
 import com.kosovandrey.cqrsbankingapp.service.CommandService;
 import com.kosovandrey.cqrsbankingapp.service.QueryService;
 
-public interface ClientService extends QueryService<Client>, CommandService<Client> {
+public interface ClientService
+        extends QueryService<Client>, CommandService<Client> {
+
+    boolean existsByUsername(String username);
+
+    Client getByUsername(String username);
+
 }

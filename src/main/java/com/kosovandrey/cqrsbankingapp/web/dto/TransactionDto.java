@@ -14,17 +14,26 @@ import java.util.UUID;
 @Setter
 public class TransactionDto {
 
-    @NotNull(message = "Id must be not null.", groups = OnUpdate.class)
+    @NotNull(
+            message = "Id must be not null.",
+            groups = OnUpdate.class
+    )
     @Null(message = "Id must be null.", groups = OnCreate.class)
     private UUID id;
 
-    @NotNull(message = "Sender card must be not null.", groups = OnCreate.class)
+    @NotNull(
+            message = "Sender card must be not null.",
+            groups = OnCreate.class
+    )
     @Null(message = "Sender must be null.")
     @Valid
     private CardDto from;
 
-    @NotNull(message = "Sender card must be not null.", groups = OnCreate.class)
-    @Null(message = "Sender must be null.")
+    @NotNull(
+            message = "Receiver card must be not null.",
+            groups = OnCreate.class
+    )
+    @Null(message = "Receiver must be null.")
     @Valid
     private CardDto to;
 

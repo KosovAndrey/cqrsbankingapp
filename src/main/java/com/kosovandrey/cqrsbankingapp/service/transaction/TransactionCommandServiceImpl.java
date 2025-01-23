@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TransactionCommandServiceImpl implements TransactionCommandService {
+public class TransactionCommandServiceImpl
+        implements TransactionCommandService {
 
     private final EventService eventService;
 

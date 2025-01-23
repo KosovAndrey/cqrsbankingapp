@@ -19,6 +19,6 @@ public class TransactionCreateEvent extends AbstractEvent {
 
     @Override
     public void apply(Aggregate aggregate) {
-
     }
+
 }
