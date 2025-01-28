@@ -1,4 +1,4 @@
-package com.kosovandrey.core.service.transaction;
+package com.kosovandrey.common.service.transaction;
 
 import com.kosovandrey.common.domain.exception.ResourceNotFoundException;
 import com.kosovandrey.common.domain.model.Transaction;
@@ -15,7 +15,7 @@ public class TransactionQueryServiceImpl implements TransactionQueryService {
     private final TransactionRepository repository;
 
     @Override
-    public Transaction getById(UUID id) {
+    public Transaction getById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }

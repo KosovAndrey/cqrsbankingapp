@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public LoginResponseDto login(LoginRequestDto request) {
+    public LoginResponseDto login(final LoginRequestDto request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -48,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void register(Client client) {
+    public void register(final Client client) {
         if (service.existsByUsername(client.getUsername())) {
             throw new ResourceAlreadyExistsException();
         }

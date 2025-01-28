@@ -13,12 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TransactionCreateEvent extends AbstractEvent {
 
-    public TransactionCreateEvent(Transaction payload) {
+    public TransactionCreateEvent(final Transaction payload) {
         super(null, EventType.TRANSACTION_CREATE, payload);
     }
 
     @Override
-    public void apply(Aggregate aggregate) {
+    public void apply(final Aggregate aggregate) {
     }
 
 }

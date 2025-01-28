@@ -1,4 +1,4 @@
-package com.kosovandrey.core.service.client;
+package com.kosovandrey.common.service.client;
 
 import com.kosovandrey.common.domain.exception.ResourceNotFoundException;
 import com.kosovandrey.common.domain.model.Client;
@@ -15,19 +15,25 @@ public class ClientQueryServiceImpl implements ClientQueryService {
     private final ClientRepository repository;
 
     @Override
-    public Client getById(UUID id) {
+    public Client getById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
-    public boolean existsByUsername(String username) {
+    public boolean existsByUsername(final String username) {
         return repository.existsByUsername(username);
     }
 
     @Override
-    public Client getByUsername(String username) {
+    public Client getByUsername(final String username) {
         return repository.findByUsername(username)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Override
+    public Client getByAccount(final UUID accountId) {
+        return repository.findByAccountId(accountId)
                 .orElseThrow(ResourceNotFoundException::new);
     }
 

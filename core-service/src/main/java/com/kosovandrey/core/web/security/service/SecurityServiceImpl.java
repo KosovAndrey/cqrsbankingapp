@@ -1,9 +1,13 @@
 package com.kosovandrey.core.web.security.service;
 
+import com.kosovandrey.common.domain.exception.ResourceNotFoundException;
+import com.kosovandrey.common.domain.model.Card;
 import com.kosovandrey.common.domain.model.Client;
 import com.kosovandrey.common.domain.model.Transaction;
+import com.kosovandrey.core.service.card.CardService;
 import com.kosovandrey.core.service.client.ClientService;
 import com.kosovandrey.core.service.transaction.TransactionService;
+import com.kosovandrey.core.web.dto.CardDto;
 import com.kosovandrey.core.web.security.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -17,20 +21,21 @@ import java.util.UUID;
 public class SecurityServiceImpl implements SecurityService {
 
     private final ClientService clientService;
+    private final CardService cardService;
     private final TransactionService transactionService;
-
 
     @Override
     public SecurityUser getUserFromRequest() {
-        Authentication authentication =
-                SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
         if (!authentication.isAuthenticated()) {
             return null;
         }
         if (authentication.getPrincipal().equals("anonymousUser")) {
             return null;
         }
-        return (SecurityUser) authentication.getPrincipal();
+        return (SecurityUser) authentication
+                .getPrincipal();
     }
 
     @Override
@@ -46,7 +51,21 @@ public class SecurityServiceImpl implements SecurityService {
         UUID id = user.getId();
         Client client = clientService.getById(id);
         return client.getCards().stream()
-                .anyMatch(c -> c.getId().equals(cardId));
+                .anyMatch(card -> card.getId().equals(cardId));
+    }
+
+    @Override
+    public boolean canAccessCard(final CardDto card) {
+        try {
+            Card foundCard = cardService.getByNumberAndDateAndCvv(
+                    card.getNumber(),
+                    card.getDate(),
+                    card.getCvv()
+            );
+            return canAccessCard(foundCard.getId());
+        } catch (ResourceNotFoundException e) {
+            return false;
+        }
     }
 
     @Override

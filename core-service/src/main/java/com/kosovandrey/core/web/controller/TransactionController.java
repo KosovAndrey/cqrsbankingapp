@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/transactions")
 @RequiredArgsConstructor
+@Validated
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -28,9 +29,10 @@ public class TransactionController {
             @RequestBody @Validated(OnCreate.class) final TransactionDto dto
     ) {
         if (!cardService.existsByNumberAndDate(
-                dto.getTo().getNumber(), dto.getTo().getDate()
-        )) {
-            throw new IllegalStateException("Card number is not valid");
+                dto.getTo().getNumber(),
+                dto.getTo().getDate())
+        ) {
+            throw new IllegalStateException("Card does not exist.");
         }
         Transaction transaction = transactionMapper.fromDto(dto);
         transactionService.create(transaction);

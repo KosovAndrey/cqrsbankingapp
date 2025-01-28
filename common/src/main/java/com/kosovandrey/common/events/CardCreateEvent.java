@@ -13,12 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CardCreateEvent extends AbstractEvent {
 
-    public CardCreateEvent(Card payload) {
+    public CardCreateEvent(final Card payload) {
         super(null, EventType.CARD_CREATE, payload);
     }
 
     @Override
-    public void apply(Aggregate aggregate) {
+    public void apply(final Aggregate aggregate) {
 
     }
 }

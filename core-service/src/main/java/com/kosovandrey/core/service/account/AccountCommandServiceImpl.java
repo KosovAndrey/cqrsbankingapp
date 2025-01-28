@@ -13,7 +13,7 @@ public class AccountCommandServiceImpl implements AccountCommandService {
     private final EventService eventService;
 
     @Override
-    public void create(Account object) {
+    public void create(final Account object) {
         AccountCreateEvent event = new AccountCreateEvent(object);
         eventService.create(event);
     }

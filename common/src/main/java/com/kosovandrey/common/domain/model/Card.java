@@ -17,6 +17,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class Card {
+
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -58,7 +59,7 @@ public class Card {
         return Objects.hash(id, number, date, cvv);
     }
 
-    public Card(Account account) {
+    public Card(final Account account) {
         this.account = account;
     }
 

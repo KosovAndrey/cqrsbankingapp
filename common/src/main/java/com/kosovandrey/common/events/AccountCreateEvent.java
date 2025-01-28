@@ -13,12 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AccountCreateEvent extends AbstractEvent {
 
-    public AccountCreateEvent(Account payload) {
+    public AccountCreateEvent(final Account payload) {
         super(null, EventType.ACCOUNT_CREATE, payload);
     }
 
     @Override
-    public void apply(Aggregate aggregate) {
+    public void apply(final Aggregate aggregate) {
 
     }
 }

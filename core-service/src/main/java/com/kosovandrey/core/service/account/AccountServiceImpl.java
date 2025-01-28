@@ -1,6 +1,7 @@
 package com.kosovandrey.core.service.account;
 
 import com.kosovandrey.common.domain.model.Account;
+import com.kosovandrey.common.service.account.AccountQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

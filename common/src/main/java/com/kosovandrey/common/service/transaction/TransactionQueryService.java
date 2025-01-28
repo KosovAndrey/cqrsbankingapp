@@ -1,7 +1,7 @@
-package com.kosovandrey.core.service.transaction;
+package com.kosovandrey.common.service.transaction;
 
 import com.kosovandrey.common.domain.model.Transaction;
-import com.kosovandrey.core.service.QueryService;
+import com.kosovandrey.common.service.QueryService;
 
 public interface TransactionQueryService extends QueryService<Transaction> {
 }

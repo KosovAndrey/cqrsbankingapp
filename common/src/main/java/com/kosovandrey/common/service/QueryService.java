@@ -1,4 +1,4 @@
-package com.kosovandrey.core.service;
+package com.kosovandrey.common.service;
 
 import java.util.UUID;
 

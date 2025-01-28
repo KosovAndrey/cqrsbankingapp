@@ -6,6 +6,9 @@ import com.kosovandrey.core.web.dto.MessageDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,7 +29,8 @@ public class ControllerAdvice {
     ) {
         return new MessageDto(e.getMessage() != null
                 ? e.getMessage()
-                : "Not found.");
+                : "Not found."
+        );
     }
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
@@ -36,7 +40,27 @@ public class ControllerAdvice {
     ) {
         return new MessageDto(e.getMessage() != null
                 ? e.getMessage()
-                : "Already exists.");
+                : "Already exists."
+        );
+    }
+
+    @ExceptionHandler({
+            BadCredentialsException.class,
+            InternalAuthenticationServiceException.class
+    })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MessageDto badCredentials(
+            final RuntimeException e
+    ) {
+        return new MessageDto("Authentication failed.");
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MessageDto accessDenied(
+            final AccessDeniedException e
+    ) {
+        return new MessageDto("Access denied.");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -52,19 +76,27 @@ public class ControllerAdvice {
                         (existingMessage, newMessage) ->
                                 existingMessage + " " + newMessage
                 ));
-        return new MessageDto("Validation failed.", errors);
+        return new MessageDto(
+                "Validation failed.",
+                errors
+        );
     }
 
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageDto illegalState(final IllegalStateException e) {
+    public MessageDto illegalState(
+            final IllegalStateException e
+    ) {
         return new MessageDto(e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public MessageDto exception(final Exception e) {
+    public MessageDto exception(
+            final Exception e
+    ) {
         log.error(e.getMessage(), e);
         return new MessageDto("Server error.");
     }
+
 }

@@ -1,6 +1,7 @@
 package com.kosovandrey.core.service.transaction;
 
 import com.kosovandrey.common.domain.model.Transaction;
+import com.kosovandrey.common.service.transaction.TransactionQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,12 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionQueryService queryService;
 
     @Override
-    public void create(Transaction object) {
+    public void create(final Transaction object) {
         commandService.create(object);
     }
 
     @Override
-    public Transaction getById(UUID id) {
+    public Transaction getById(final UUID id) {
         return queryService.getById(id);
     }
 

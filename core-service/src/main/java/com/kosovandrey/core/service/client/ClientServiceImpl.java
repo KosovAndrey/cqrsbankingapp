@@ -1,6 +1,7 @@
 package com.kosovandrey.core.service.client;
 
 import com.kosovandrey.common.domain.model.Client;
+import com.kosovandrey.common.service.client.ClientQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +15,22 @@ public class ClientServiceImpl implements ClientService {
     private final ClientQueryService queryService;
 
     @Override
-    public void create(Client object) {
+    public void create(final Client object) {
         commandService.create(object);
     }
 
     @Override
-    public Client getById(UUID id) {
+    public Client getById(final UUID id) {
         return queryService.getById(id);
     }
 
     @Override
-    public Client getByUsername(String username) {
+    public Client getByUsername(final String username) {
         return queryService.getByUsername(username);
     }
 
     @Override
-    public boolean existsByUsername(String username) {
+    public boolean existsByUsername(final String username) {
         return queryService.existsByUsername(username);
     }
 
