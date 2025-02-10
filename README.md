@@ -1,0 +1,2 @@
+•	Описание: Реализовано учебное банковское приложение на основе архитектуры CQRS. Приложение моделирует базовые операции банка, такие как управление счетами, проведение транзакций и просмотр баланса.
+•	Стек технологий: Java 17, Spring Boot, Spring Data JPA, Spring Web, Spring Security, Spring Validation, PostgreSQL, Liquibase, MapStruct, Debezium, Apache Kafka, JWT, Lombok, Jackson Databind, Gson, Maven.
